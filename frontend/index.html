@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="PhishShield Pro — Advanced AI-powered phishing URL detection. Analyze any URL for phishing risk with hybrid rule-based and machine learning analysis.">
+    <title>PhishShield Pro — AI Phishing Detection</title>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Animated background particles -->
+    <div class="bg-particles" id="bgParticles"></div>
+
+    <!-- Main container -->
+    <div class="app-container">
+
+        <!-- Header / Branding -->
+        <header class="header" id="appHeader">
+            <div class="logo">
+                <div class="logo-icon">
+                    <svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M20 2L36 10V22C36 30.8 29.1 38.4 20 40C10.9 38.4 4 30.8 4 22V10L20 2Z" fill="url(#shieldGrad)" opacity="0.9"/>
+                        <path d="M20 6L32 12V22C32 28.6 26.7 34.6 20 36C13.3 34.6 8 28.6 8 22V12L20 6Z" fill="url(#shieldInner)" opacity="0.5"/>
+                        <path d="M18 24L14 20L15.4 18.6L18 21.2L24.6 14.6L26 16L18 24Z" fill="white"/>
+                        <defs>
+                            <linearGradient id="shieldGrad" x1="4" y1="2" x2="36" y2="40" gradientUnits="userSpaceOnUse">
+                                <stop stop-color="#6366f1"/>
+                                <stop offset="1" stop-color="#06b6d4"/>
+                            </linearGradient>
+                            <linearGradient id="shieldInner" x1="8" y1="6" x2="32" y2="36" gradientUnits="userSpaceOnUse">
+                                <stop stop-color="#818cf8"/>
+                                <stop offset="1" stop-color="#22d3ee"/>
+                            </linearGradient>
+                        </defs>
+                    </svg>
+                </div>
+                <div class="logo-text">
+                    <h1>PhishShield <span class="pro-badge">PRO</span></h1>
+                    <p class="tagline">AI-Powered Phishing Detection</p>
+                </div>
+            </div>
+            <div class="header-stats">
+                <div class="stat-chip">
+                    <span class="stat-dot pulse-green"></span>
+                    <span>System Online</span>
+                </div>
+            </div>
+        </header>
+
+        <!-- Scanner Section -->
+        <section class="scanner-section" id="scannerSection">
+            <div class="scanner-card">
+                <div class="scanner-glow"></div>
+                <h2 class="scanner-title">Analyze a URL</h2>
+                <p class="scanner-subtitle">Paste any URL to check for phishing threats using our hybrid AI engine</p>
+
+                <div class="input-group" id="inputGroup">
+                    <div class="input-wrapper">
+                        <svg class="input-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/>
+                            <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/>
+                        </svg>
+                        <input
+                            type="text"
+                            id="urlInput"
+                            placeholder="Enter URL to scan (e.g., https://example.com)"
+                            autocomplete="off"
+                            spellcheck="false"
+                        >
+                        <button id="clearBtn" class="clear-btn" title="Clear input" style="display:none">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/>
+                            </svg>
+                        </button>
+                    </div>
+                    <button id="scanBtn" class="scan-btn" onclick="scanURL()">
+                        <svg class="scan-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/>
+                        </svg>
+                        <span class="btn-text">Scan URL</span>
+                        <div class="btn-loader" style="display:none">
+                            <div class="spinner"></div>
+                        </div>
+                    </button>
+                </div>
+
+                <div class="error-msg" id="errorMsg" style="display:none"></div>
+
+                <!-- Quick examples -->
+                <div class="quick-examples">
+                    <span class="examples-label">Try:</span>
+                    <button class="example-chip" onclick="setExample('https://www.google.com')">google.com</button>
+                    <button class="example-chip" onclick="setExample('http://secure-banking-login.tk/verify')">phishing example</button>
+                    <button class="example-chip" onclick="setExample('http://192.168.1.1/login/verify-account')">IP-based URL</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Loading State -->
+        <section class="loading-section" id="loadingSection" style="display:none">
+            <div class="loading-card">
+                <div class="scan-animation">
+                    <div class="scan-ring ring-1"></div>
+                    <div class="scan-ring ring-2"></div>
+                    <div class="scan-ring ring-3"></div>
+                    <div class="scan-center">
+                        <svg viewBox="0 0 40 40" fill="none">
+                            <path d="M20 2L36 10V22C36 30.8 29.1 38.4 20 40C10.9 38.4 4 30.8 4 22V10L20 2Z" fill="url(#loadGrad)" opacity="0.8"/>
+                            <defs>
+                                <linearGradient id="loadGrad" x1="4" y1="2" x2="36" y2="40">
+                                    <stop stop-color="#6366f1"/>
+                                    <stop offset="1" stop-color="#06b6d4"/>
+                                </linearGradient>
+                            </defs>
+                        </svg>
+                    </div>
+                </div>
+                <p class="loading-text" id="loadingText">Analyzing URL...</p>
+                <div class="loading-steps">
+                    <div class="step active" id="step1">
+                        <span class="step-dot"></span>
+                        <span>Extracting features</span>
+                    </div>
+                    <div class="step" id="step2">
+                        <span class="step-dot"></span>
+                        <span>Running rule engine</span>
+                    </div>
+                    <div class="step" id="step3">
+                        <span class="step-dot"></span>
+                        <span>ML model prediction</span>
+                    </div>
+                    <div class="step" id="step4">
+                        <span class="step-dot"></span>
+                        <span>Generating report</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Results Section -->
+        <section class="results-section" id="resultsSection" style="display:none">
+
+            <!-- Risk Overview Card -->
+            <div class="result-card risk-card" id="riskCard">
+                <div class="risk-header">
+                    <div class="risk-badge" id="riskBadge">
+                        <span class="badge-icon" id="badgeIcon"></span>
+                        <span class="badge-text" id="badgeText"></span>
+                    </div>
+                    <div class="scanned-url" id="scannedUrl"></div>
+                </div>
+
+                <div class="score-section">
+                    <div class="score-ring-container">
+                        <svg class="score-ring" viewBox="0 0 140 140">
+                            <circle class="score-bg" cx="70" cy="70" r="60" fill="none" stroke-width="10"/>
+                            <circle class="score-progress" id="scoreProgress" cx="70" cy="70" r="60" fill="none" stroke-width="10"
+                                stroke-dasharray="377" stroke-dashoffset="377" stroke-linecap="round"
+                                transform="rotate(-90 70 70)"/>
+                        </svg>
+                        <div class="score-value" id="scoreValue">0</div>
+                        <div class="score-label">Risk Score</div>
+                    </div>
+
+                    <div class="score-breakdown">
+                        <div class="breakdown-item">
+                            <span class="breakdown-label">Rule-Based</span>
+                            <div class="mini-bar">
+                                <div class="mini-bar-fill" id="ruleBarFill"></div>
+                            </div>
+                            <span class="breakdown-val" id="ruleScore">0</span>
+                        </div>
+                        <div class="breakdown-item">
+                            <span class="breakdown-label">ML Model</span>
+                            <div class="mini-bar">
+                                <div class="mini-bar-fill" id="mlBarFill"></div>
+                            </div>
+                            <span class="breakdown-val" id="mlScore">0</span>
+                        </div>
+                        <div class="breakdown-item">
+                            <span class="breakdown-label">ML Confidence</span>
+                            <div class="mini-bar">
+                                <div class="mini-bar-fill" id="mlConfFill"></div>
+                            </div>
+                            <span class="breakdown-val" id="mlConf">0%</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Two-column layout for reasons & features -->
+            <div class="results-grid">
+
+                <!-- Reasons Card -->
+                <div class="result-card reasons-card">
+                    <h3 class="card-title">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M9 11l3 3L22 4"/>
+                            <path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/>
+                        </svg>
+                        Analysis Findings
+                    </h3>
+                    <ul class="reasons-list" id="reasonsList"></ul>
+                </div>
+
+                <!-- Features Card -->
+                <div class="result-card features-card">
+                    <h3 class="card-title">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/>
+                            <rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/>
+                        </svg>
+                        Feature Breakdown
+                    </h3>
+                    <div class="features-grid" id="featuresGrid"></div>
+                </div>
+            </div>
+
+            <!-- Scan Again Button -->
+            <div class="scan-again-wrapper">
+                <button class="scan-again-btn" onclick="resetScanner()">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <polyline points="1 4 1 10 7 10"/>
+                        <path d="M3.51 15a9 9 0 1 0 2.13-9.36L1 10"/>
+                    </svg>
+                    Scan Another URL
+                </button>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <p>Built with <span class="heart">♥</span> for cybersecurity — PhishShield Pro &copy; 2026</p>
+        </footer>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
