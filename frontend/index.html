@@ -1,18 +1,23 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="PhishShield Pro — Advanced AI-powered phishing URL detection. Analyze any URL for phishing risk with hybrid rule-based and machine learning analysis.">
+    <meta name="description"
+        content="PhishShield Pro — Advanced AI-powered phishing URL detection. Analyze any URL for phishing risk with hybrid rule-based and machine learning analysis.">
     <title>PhishShield Pro — AI Phishing Detection</title>
 
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&display=swap"
+        rel="stylesheet">
 
     <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
     <!-- Animated background particles -->
     <div class="bg-particles" id="bgParticles"></div>
@@ -25,17 +30,21 @@
             <div class="logo">
                 <div class="logo-icon">
                     <svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M20 2L36 10V22C36 30.8 29.1 38.4 20 40C10.9 38.4 4 30.8 4 22V10L20 2Z" fill="url(#shieldGrad)" opacity="0.9"/>
-                        <path d="M20 6L32 12V22C32 28.6 26.7 34.6 20 36C13.3 34.6 8 28.6 8 22V12L20 6Z" fill="url(#shieldInner)" opacity="0.5"/>
-                        <path d="M18 24L14 20L15.4 18.6L18 21.2L24.6 14.6L26 16L18 24Z" fill="white"/>
+                        <path d="M20 2L36 10V22C36 30.8 29.1 38.4 20 40C10.9 38.4 4 30.8 4 22V10L20 2Z"
+                            fill="url(#shieldGrad)" opacity="0.9" />
+                        <path d="M20 6L32 12V22C32 28.6 26.7 34.6 20 36C13.3 34.6 8 28.6 8 22V12L20 6Z"
+                            fill="url(#shieldInner)" opacity="0.5" />
+                        <path d="M18 24L14 20L15.4 18.6L18 21.2L24.6 14.6L26 16L18 24Z" fill="white" />
                         <defs>
-                            <linearGradient id="shieldGrad" x1="4" y1="2" x2="36" y2="40" gradientUnits="userSpaceOnUse">
-                                <stop stop-color="#6366f1"/>
-                                <stop offset="1" stop-color="#06b6d4"/>
+                            <linearGradient id="shieldGrad" x1="4" y1="2" x2="36" y2="40"
+                                gradientUnits="userSpaceOnUse">
+                                <stop stop-color="#6366f1" />
+                                <stop offset="1" stop-color="#06b6d4" />
                             </linearGradient>
-                            <linearGradient id="shieldInner" x1="8" y1="6" x2="32" y2="36" gradientUnits="userSpaceOnUse">
-                                <stop stop-color="#818cf8"/>
-                                <stop offset="1" stop-color="#22d3ee"/>
+                            <linearGradient id="shieldInner" x1="8" y1="6" x2="32" y2="36"
+                                gradientUnits="userSpaceOnUse">
+                                <stop stop-color="#818cf8" />
+                                <stop offset="1" stop-color="#22d3ee" />
                             </linearGradient>
                         </defs>
                     </svg>
@@ -63,25 +72,22 @@
                 <div class="input-group" id="inputGroup">
                     <div class="input-wrapper">
                         <svg class="input-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/>
-                            <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/>
+                            <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71" />
+                            <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71" />
                         </svg>
-                        <input
-                            type="text"
-                            id="urlInput"
-                            placeholder="Enter URL to scan (e.g., https://example.com)"
-                            autocomplete="off"
-                            spellcheck="false"
-                        >
+                        <input type="text" id="urlInput" placeholder="Enter URL to scan (e.g., https://example.com)"
+                            autocomplete="off" spellcheck="false">
                         <button id="clearBtn" class="clear-btn" title="Clear input" style="display:none">
                             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                <line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/>
+                                <line x1="18" y1="6" x2="6" y2="18" />
+                                <line x1="6" y1="6" x2="18" y2="18" />
                             </svg>
                         </button>
                     </div>
                     <button id="scanBtn" class="scan-btn" onclick="scanURL()">
                         <svg class="scan-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/>
+                            <circle cx="11" cy="11" r="8" />
+                            <line x1="21" y1="21" x2="16.65" y2="16.65" />
                         </svg>
                         <span class="btn-text">Scan URL</span>
                         <div class="btn-loader" style="display:none">
@@ -96,8 +102,10 @@
                 <div class="quick-examples">
                     <span class="examples-label">Try:</span>
                     <button class="example-chip" onclick="setExample('https://www.google.com')">google.com</button>
-                    <button class="example-chip" onclick="setExample('http://secure-banking-login.tk/verify')">phishing example</button>
-                    <button class="example-chip" onclick="setExample('http://192.168.1.1/login/verify-account')">IP-based URL</button>
+                    <button class="example-chip" onclick="setExample('http://secure-banking-login.tk/verify')">phishing
+                        example</button>
+                    <button class="example-chip"
+                        onclick="setExample('http://192.168.1.1/login/verify-account')">IP-based URL</button>
                 </div>
             </div>
         </section>
@@ -111,11 +119,12 @@
                     <div class="scan-ring ring-3"></div>
                     <div class="scan-center">
                         <svg viewBox="0 0 40 40" fill="none">
-                            <path d="M20 2L36 10V22C36 30.8 29.1 38.4 20 40C10.9 38.4 4 30.8 4 22V10L20 2Z" fill="url(#loadGrad)" opacity="0.8"/>
+                            <path d="M20 2L36 10V22C36 30.8 29.1 38.4 20 40C10.9 38.4 4 30.8 4 22V10L20 2Z"
+                                fill="url(#loadGrad)" opacity="0.8" />
                             <defs>
                                 <linearGradient id="loadGrad" x1="4" y1="2" x2="36" y2="40">
-                                    <stop stop-color="#6366f1"/>
-                                    <stop offset="1" stop-color="#06b6d4"/>
+                                    <stop stop-color="#6366f1" />
+                                    <stop offset="1" stop-color="#06b6d4" />
                                 </linearGradient>
                             </defs>
                         </svg>
@@ -159,10 +168,10 @@
                 <div class="score-section">
                     <div class="score-ring-container">
                         <svg class="score-ring" viewBox="0 0 140 140">
-                            <circle class="score-bg" cx="70" cy="70" r="60" fill="none" stroke-width="10"/>
-                            <circle class="score-progress" id="scoreProgress" cx="70" cy="70" r="60" fill="none" stroke-width="10"
-                                stroke-dasharray="377" stroke-dashoffset="377" stroke-linecap="round"
-                                transform="rotate(-90 70 70)"/>
+                            <circle class="score-bg" cx="70" cy="70" r="60" fill="none" stroke-width="10" />
+                            <circle class="score-progress" id="scoreProgress" cx="70" cy="70" r="60" fill="none"
+                                stroke-width="10" stroke-dasharray="377" stroke-dashoffset="377" stroke-linecap="round"
+                                transform="rotate(-90 70 70)" />
                         </svg>
                         <div class="score-value" id="scoreValue">0</div>
                         <div class="score-label">Risk Score</div>
@@ -201,8 +210,8 @@
                 <div class="result-card reasons-card">
                     <h3 class="card-title">
                         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <path d="M9 11l3 3L22 4"/>
-                            <path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/>
+                            <path d="M9 11l3 3L22 4" />
+                            <path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11" />
                         </svg>
                         Analysis Findings
                     </h3>
@@ -213,8 +222,10 @@
                 <div class="result-card features-card">
                     <h3 class="card-title">
                         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/>
-                            <rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/>
+                            <rect x="3" y="3" width="7" height="7" />
+                            <rect x="14" y="3" width="7" height="7" />
+                            <rect x="14" y="14" width="7" height="7" />
+                            <rect x="3" y="14" width="7" height="7" />
                         </svg>
                         Feature Breakdown
                     </h3>
@@ -226,8 +237,8 @@
             <div class="scan-again-wrapper">
                 <button class="scan-again-btn" onclick="resetScanner()">
                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <polyline points="1 4 1 10 7 10"/>
-                        <path d="M3.51 15a9 9 0 1 0 2.13-9.36L1 10"/>
+                        <polyline points="1 4 1 10 7 10" />
+                        <path d="M3.51 15a9 9 0 1 0 2.13-9.36L1 10" />
                     </svg>
                     Scan Another URL
                 </button>
@@ -242,4 +253,5 @@
 
     <script src="script.js"></script>
 </body>
+
 </html>

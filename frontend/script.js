@@ -9,10 +9,10 @@
 const API_BASE = 'http://localhost:5000';
 
 // ── DOM Elements ──
-const urlInput     = document.getElementById('urlInput');
-const scanBtn      = document.getElementById('scanBtn');
-const clearBtn     = document.getElementById('clearBtn');
-const errorMsg     = document.getElementById('errorMsg');
+const urlInput = document.getElementById('urlInput');
+const scanBtn = document.getElementById('scanBtn');
+const clearBtn = document.getElementById('clearBtn');
+const errorMsg = document.getElementById('errorMsg');
 const loadingSection = document.getElementById('loadingSection');
 const resultsSection = document.getElementById('resultsSection');
 const scannerSection = document.getElementById('scannerSection');
@@ -36,11 +36,11 @@ function createParticles() {
         const p = document.createElement('div');
         p.classList.add('particle');
         const size = Math.random() * 4 + 2;
-        p.style.width  = size + 'px';
+        p.style.width = size + 'px';
         p.style.height = size + 'px';
-        p.style.left   = Math.random() * 100 + '%';
+        p.style.left = Math.random() * 100 + '%';
         p.style.animationDuration = (Math.random() * 15 + 10) + 's';
-        p.style.animationDelay    = (Math.random() * 10) + 's';
+        p.style.animationDelay = (Math.random() * 10) + 's';
 
         // Random color variant
         const colors = ['#6366f1', '#06b6d4', '#8b5cf6', '#818cf8'];
@@ -200,13 +200,13 @@ function renderResults(data) {
     const { url, risk, score, reasons, features, details } = data;
 
     // ── Risk Badge ──
-    const riskCard  = document.getElementById('riskCard');
+    const riskCard = document.getElementById('riskCard');
     const riskBadge = document.getElementById('riskBadge');
     const badgeIcon = document.getElementById('badgeIcon');
     const badgeText = document.getElementById('badgeText');
 
     // Remove old classes
-    riskCard.className  = 'result-card risk-card';
+    riskCard.className = 'result-card risk-card';
     riskBadge.className = 'risk-badge';
 
     if (risk === 'LOW') {
@@ -231,13 +231,13 @@ function renderResults(data) {
 
     // ── Score Ring ──
     const scoreProgress = document.getElementById('scoreProgress');
-    const scoreValue    = document.getElementById('scoreValue');
+    const scoreValue = document.getElementById('scoreValue');
     const circumference = 2 * Math.PI * 60; // r=60
 
     scoreProgress.className = 'score-progress';
-    if (risk === 'LOW')    scoreProgress.classList.add('low');
+    if (risk === 'LOW') scoreProgress.classList.add('low');
     if (risk === 'MEDIUM') scoreProgress.classList.add('medium');
-    if (risk === 'HIGH')   scoreProgress.classList.add('high');
+    if (risk === 'HIGH') scoreProgress.classList.add('high');
 
     // Animate score
     const offset = circumference - (score / 100) * circumference;
@@ -248,24 +248,24 @@ function renderResults(data) {
     animateCounter(scoreValue, 0, score, 1200);
 
     // Set score value text color
-    if (risk === 'LOW')    scoreValue.style.color = 'var(--risk-low)';
+    if (risk === 'LOW') scoreValue.style.color = 'var(--risk-low)';
     if (risk === 'MEDIUM') scoreValue.style.color = 'var(--risk-medium)';
-    if (risk === 'HIGH')   scoreValue.style.color = 'var(--risk-high)';
+    if (risk === 'HIGH') scoreValue.style.color = 'var(--risk-high)';
 
     // ── Score Breakdown ──
     if (details) {
         const ruleScore = details.rule_based_score || 0;
-        const mlScore   = details.ml_score || 0;
-        const mlProba   = details.ml_probability || 0;
+        const mlScore = details.ml_score || 0;
+        const mlProba = details.ml_probability || 0;
 
         document.getElementById('ruleScore').textContent = ruleScore;
-        document.getElementById('mlScore').textContent   = mlScore;
-        document.getElementById('mlConf').textContent    = (mlProba * 100).toFixed(1) + '%';
+        document.getElementById('mlScore').textContent = mlScore;
+        document.getElementById('mlConf').textContent = (mlProba * 100).toFixed(1) + '%';
 
         setTimeout(() => {
             document.getElementById('ruleBarFill').style.width = Math.min(ruleScore, 100) + '%';
-            document.getElementById('mlBarFill').style.width   = mlScore + '%';
-            document.getElementById('mlConfFill').style.width  = (mlProba * 100) + '%';
+            document.getElementById('mlBarFill').style.width = mlScore + '%';
+            document.getElementById('mlConfFill').style.width = (mlProba * 100) + '%';
         }, 200);
     }
 
@@ -296,17 +296,17 @@ function renderResults(data) {
     featuresGrid.innerHTML = '';
 
     const featureLabels = {
-        url_length:         'URL Length',
-        has_https:          'HTTPS',
-        num_hyphens:        'Hyphens',
-        num_dots:           'Dots',
-        has_ip:             'IP Address',
+        url_length: 'URL Length',
+        has_https: 'HTTPS',
+        num_hyphens: 'Hyphens',
+        num_dots: 'Dots',
+        has_ip: 'IP Address',
         has_suspicious_tld: 'Suspicious TLD',
-        keyword_count:      'Keywords',
-        special_chars:      'Special Chars',
-        subdomain_count:    'Subdomains',
-        path_depth:         'Path Depth',
-        entropy:            'Entropy'
+        keyword_count: 'Keywords',
+        special_chars: 'Special Chars',
+        subdomain_count: 'Subdomains',
+        path_depth: 'Path Depth',
+        entropy: 'Entropy'
     };
 
     Object.entries(features).forEach(([key, val], i) => {
@@ -356,11 +356,11 @@ function renderResults(data) {
 // ═══════════════════════════════════════
 
 function animateCounter(element, start, end, duration) {
-    const range     = end - start;
+    const range = end - start;
     const startTime = performance.now();
 
     function update(currentTime) {
-        const elapsed  = currentTime - startTime;
+        const elapsed = currentTime - startTime;
         const progress = Math.min(elapsed / duration, 1);
 
         // Ease out cubic
@@ -395,8 +395,8 @@ function resetScanner() {
 
     // Reset breakdown bars
     document.getElementById('ruleBarFill').style.width = '0%';
-    document.getElementById('mlBarFill').style.width   = '0%';
-    document.getElementById('mlConfFill').style.width  = '0%';
+    document.getElementById('mlBarFill').style.width = '0%';
+    document.getElementById('mlConfFill').style.width = '0%';
 
     // Show scanner
     showSection('scanner');
@@ -409,18 +409,18 @@ function resetScanner() {
 // ═══════════════════════════════════════
 
 function setLoadingState(isLoading) {
-    const btnText   = scanBtn.querySelector('.btn-text');
-    const btnIcon   = scanBtn.querySelector('.scan-icon');
+    const btnText = scanBtn.querySelector('.btn-text');
+    const btnIcon = scanBtn.querySelector('.scan-icon');
     const btnLoader = scanBtn.querySelector('.btn-loader');
 
-    scanBtn.disabled             = isLoading;
-    btnText.style.display        = isLoading ? 'none' : 'inline';
-    btnIcon.style.display        = isLoading ? 'none' : 'inline';
-    btnLoader.style.display      = isLoading ? 'flex' : 'none';
+    scanBtn.disabled = isLoading;
+    btnText.style.display = isLoading ? 'none' : 'inline';
+    btnIcon.style.display = isLoading ? 'none' : 'inline';
+    btnLoader.style.display = isLoading ? 'flex' : 'none';
 }
 
 function showError(msg) {
-    errorMsg.textContent   = msg;
+    errorMsg.textContent = msg;
     errorMsg.style.display = 'block';
 }
 

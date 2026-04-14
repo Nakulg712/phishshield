@@ -16,34 +16,23 @@ CORS(app)  # Enable CORS for frontend communication
 
 
 def is_valid_url(url: str) -> bool:
-    """
-    Basic URL validation — checks for a reasonable URL pattern.
-    Accepts http://, https://, and raw domains.
-    """
     pattern = re.compile(
-        r'^(https?://)?'                # optional scheme
-        r'(\d{1,3}\.){3}\d{1,3}'       # ...or IP
+        r'^(https?://)?'
+        r'(\d{1,3}\.){3}\d{1,3}'
         r'|'
-        r'^(https?://)?'                # optional scheme
-        r'[a-zA-Z0-9]+'                # domain
-        r'([-.][a-zA-Z0-9]+)*'         # sub-domains
-        r'\.[a-zA-Z]{2,}'              # TLD
-        r'(:\d+)?'                     # optional port
-        r'(/.*)?$',                    # optional path
-        re.IGNORECASE
+        r'^(https?://)?'
+        r'[a-zA-Z0-9]+'
+        r'([-.][a-zA-Z0-9]+)*'
+        r'\.[a-zA-Z]{2,}'
+        r'(:\d+)?'
+        r'(/.*)?$',
+        re.IGNORECASE,
     )
     return bool(pattern.match(url.strip()))
 
 
 @app.route('/scan', methods=['POST'])
 def scan_url():
-    """
-    POST /scan
-    ----------
-    Accepts JSON: { "url": "http://example.com" }
-    Returns risk analysis with score, reasons, and features.
-    """
-    # Parse request body
     data = request.get_json(silent=True)
 
     if not data or 'url' not in data:
@@ -57,12 +46,10 @@ def scan_url():
     if not url:
         return jsonify({"error": "URL cannot be empty"}), 400
 
-    # Add scheme if missing (for analysis consistency)
     if not url.startswith(('http://', 'https://')):
         url = 'http://' + url
 
     try:
-        # Run the full analysis
         result = analyze_url(url)
         return jsonify(result), 200
 
@@ -75,13 +62,14 @@ def scan_url():
 
 @app.route('/health', methods=['GET'])
 def health_check():
-    """Health check endpoint."""
     return jsonify({"status": "ok", "service": "PhishShield Pro API"}), 200
+
+
+# ✅ FIXED: moved outside and removed duplicate
 
 
 # ── Start server ──
 if __name__ == '__main__':
-    # Pre-train/load the ML model on startup
     print("[PhishShield] Initializing ML model...")
     get_model()
     print("[PhishShield] Server starting on http://localhost:5000")
